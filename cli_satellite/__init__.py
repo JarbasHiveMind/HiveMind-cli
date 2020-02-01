@@ -1,15 +1,14 @@
 import json
 from threading import Thread
-from jarbas_hive_mind.slave.terminal import HiveMindTerminal, HiveMindTerminalProtocol
+from jarbas_hive_mind.slave.terminal import HiveMindTerminalProtocol, HiveMindTerminal
+from jarbas_utils.log import LOG
 
 platform = "JarbasCliTerminalv0.1"
-
-from jarbas_utils.log import LOG
 
 
 class JarbasCliTerminalProtocol(HiveMindTerminalProtocol):
     def onOpen(self):
-        LOG.info("[INFO] WebSocket connection open. ")
+        LOG.info("WebSocket connection open. ")
         self.input_loop = Thread(target=self.get_cli_input)
         self.input_loop.setDaemon(True)
         self.input_loop.start()
@@ -22,13 +21,13 @@ class JarbasCliTerminalProtocol(HiveMindTerminalProtocol):
                 utterance = msg["data"]["utterance"]
                 LOG.info("[OUTPUT] " + utterance)
             elif msg.get("type", "") == "hive.complete_intent_failure":
-                LOG.error("[ERROR] complete intent failure")
+                LOG.error("complete intent failure")
         else:
             pass
 
     # cli input thread
     def get_cli_input(self):
-        LOG.info("[INFO] waiting for input")
+        LOG.info("waiting for input")
         while True:
             line = input("")
             msg = {"data": {"utterances": [line], "lang": "en-us"},
@@ -40,3 +39,6 @@ class JarbasCliTerminalProtocol(HiveMindTerminalProtocol):
             msg = bytes(msg, encoding="utf-8")
             self.sendMessage(msg, False)
 
+
+class JarbasCliTerminal(HiveMindTerminal):
+    protocol = JarbasCliTerminalProtocol
