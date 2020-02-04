@@ -4,10 +4,12 @@ from jarbas_hive_mind import HiveMindConnection
 
 def connect_to_hivemind(host="127.0.0.1",
                         port=5678, name="JarbasCliTerminal",
-                        key="cli_key", useragent=platform):
+                        key="cli_key", crypto_key="1L6z3WAtk4c5U9sS",
+                        useragent=platform):
     con = HiveMindConnection(host, port)
 
     terminal = JarbasCliTerminal(con.address,
+                                 crypto_key=crypto_key,
                                  headers=con.get_headers(name, key),
                                  useragent=useragent)
 

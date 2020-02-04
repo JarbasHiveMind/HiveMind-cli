@@ -15,8 +15,8 @@ class JarbasCliTerminalProtocol(HiveMindTerminalProtocol):
 
     def onMessage(self, payload, isBinary):
         if not isBinary:
-            payload = payload.decode("utf-8")
-            msg = json.loads(payload)
+            msg = self.decode(payload)
+            msg = json.loads(msg)
             if msg.get("type", "") == "speak":
                 utterance = msg["data"]["utterance"]
                 self.factory.speak(utterance)
@@ -78,7 +78,6 @@ class JarbasCliTerminal(HiveMindTerminal):
                                "destination": "hive_mind",
                                "platform": platform}}
             msg = json.dumps(msg)
-            msg = bytes(msg, encoding="utf-8")
             self.client.sendMessage(msg, False)
             self.waiting = True
 
