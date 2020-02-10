@@ -2,9 +2,9 @@ from cli_satellite import JarbasCliTerminal, platform
 from jarbas_hive_mind import HiveMindConnection
 
 
-def connect_to_hivemind(host="127.0.0.1",
+def connect_to_hivemind(host="wss://127.0.0.1",
                         port=5678, name="JarbasCliTerminal",
-                        key="cli_key", crypto_key="1L6z3WAtk4c5U9sS",
+                        key="cli_key", crypto_key="rh6K5q0FBiCzT5Wg",
                         useragent=platform):
     con = HiveMindConnection(host, port)
 
@@ -13,7 +13,7 @@ def connect_to_hivemind(host="127.0.0.1",
                                  headers=con.get_headers(name, key),
                                  useragent=useragent)
 
-    con.secure_connect(terminal)
+    con.connect(terminal)
 
 
 if __name__ == '__main__':

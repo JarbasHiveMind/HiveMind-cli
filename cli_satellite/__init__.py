@@ -1,8 +1,8 @@
-import json
 from time import sleep
 from jarbas_hive_mind.slave.terminal import HiveMindTerminalProtocol, HiveMindTerminal
 from jarbas_utils.log import LOG
 from jarbas_utils import create_daemon
+from jarbas_utils.messagebus import Message
 
 platform = "JarbasCliTerminalV0.2"
 
@@ -12,21 +12,6 @@ class JarbasCliTerminalProtocol(HiveMindTerminalProtocol):
     def onOpen(self):
         super().onOpen()
         create_daemon(self.factory.get_cli_input)
-
-    def onMessage(self, payload, isBinary):
-        if not isBinary:
-            msg = self.decode(payload)
-            msg = json.loads(msg)
-            if msg.get("type", "") == "speak":
-                utterance = msg["data"]["utterance"]
-                self.factory.speak(utterance)
-            elif msg.get("type", "") == "hive.complete_intent_failure":
-                LOG.error("complete intent failure")
-                self.factory.speak('I don\'t know how to answer that')
-            elif msg.get("type", "") == "mycroft.skill.handler.complete":
-                self.factory.on_handled()
-        else:
-            pass
 
 
 class JarbasCliTerminal(HiveMindTerminal):
@@ -38,6 +23,7 @@ class JarbasCliTerminal(HiveMindTerminal):
         self.debug = debug
         self.waiting = False
 
+    # terminal
     def say(self, utterance):
         if self.debug:
             LOG.debug("[UTTERANCE] " + utterance)
@@ -59,7 +45,6 @@ class JarbasCliTerminal(HiveMindTerminal):
             LOG.debug("Request handled")
         self.waiting = False
 
-    # cli input thread
     def get_cli_input(self):
         while True:
             if self.waiting:
@@ -72,12 +57,25 @@ class JarbasCliTerminal(HiveMindTerminal):
             else:
                 line = input("INPUT:")
             self.say(line)
-            msg = {"data": {"utterances": [line], "lang": "en-us"},
+
+            msg = {"data": {"utterances": [line],
+                            "lang": "en-us"},
                    "type": "recognizer_loop:utterance",
                    "context": {"source": self.client.peer,
                                "destination": "hive_mind",
                                "platform": platform}}
-            msg = json.dumps(msg)
-            self.client.sendMessage(msg, False)
+            self.send_to_hivemind_bus(msg)
             self.waiting = True
+
+    # parsed protocol messages
+    def handle_incoming_mycroft(self, message):
+        assert isinstance(message, Message)
+        if message.msg_type == "speak":
+            utterance = message.data["utterance"]
+            self.speak(utterance)
+        elif message.msg_type == "hive.complete_intent_failure":
+            LOG.error("complete intent failure")
+            self.speak('I don\'t know how to answer that')
+        elif message.msg_type == "mycroft.skill.handler.complete":
+            self.on_handled()
 
