@@ -1,1 +1,1 @@
-jarbas_hive_mind>=0.8.0
+jarbas_hive_mind>=0.10.0rc1.
