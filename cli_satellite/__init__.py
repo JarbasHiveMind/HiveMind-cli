@@ -1,71 +1,74 @@
-from time import sleep
 from jarbas_hive_mind.slave.terminal import HiveMindTerminalProtocol, HiveMindTerminal
 from jarbas_utils.log import LOG
 from jarbas_utils import create_daemon
 from jarbas_utils.messagebus import Message
+from curses import wrapper
+import curses
+from time import sleep
 
-platform = "JarbasCliTerminalV0.2"
+
+platform = "JarbasCliTerminalV0.3"
 
 
 class JarbasCliTerminalProtocol(HiveMindTerminalProtocol):
 
     def onOpen(self):
         super().onOpen()
-        create_daemon(self.factory.get_cli_input)
+        create_daemon(self.factory.run_gui)
 
 
 class JarbasCliTerminal(HiveMindTerminal):
     protocol = JarbasCliTerminalProtocol
 
-    def __init__(self, colors=True, debug=False, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.color = colors
-        self.debug = debug
         self.waiting = False
 
     # terminal
-    def say(self, utterance):
-        if self.debug:
-            LOG.debug("[UTTERANCE] " + utterance)
-        if self.color:
-            print('\x1b[6;33;40m YOU: ' + utterance + ' \x1b[0m')
-        else:
-            print('YOU: ' + utterance)
-
     def speak(self, utterance):
-        if self.debug:
-            LOG.debug("[SPEAK] " + utterance)
-        if self.color:
-            print('\x1b[6;34;40m MYCROFT: ' + utterance + ' \x1b[0m')
-        else:
-            print('MYCROFT: ' + utterance)
+        self.msg_box.addstr("Mycroft > {utterance} \n".format(utterance=utterance))
 
     def on_handled(self):
-        if self.debug:
-            LOG.debug("Request handled")
         self.waiting = False
 
-    def get_cli_input(self):
-        while True:
-            if self.waiting:
-                sleep(0.3)
-                continue
-            if self.debug:
-                LOG.debug("waiting for input")
-            if self.color:
-                line = input("\x1b[6;33;40m INPUT: \x1b[0m")
-            else:
-                line = input("INPUT:")
-            self.say(line)
+    def _run_curses_gui(self, stdscr):
+        curses.echo()
+        lasty, lastx = stdscr.getmaxyx()
+        self.input_box = curses.newwin(0, lastx, lasty - 3, 0)
 
-            msg = {"data": {"utterances": [line],
-                            "lang": "en-us"},
-                   "type": "recognizer_loop:utterance",
-                   "context": {"source": self.client.peer,
-                               "destination": "hive_mind",
-                               "platform": platform}}
-            self.send_to_hivemind_bus(msg)
-            self.waiting = True
+        self.header_box = curses.newwin(lasty - 4, lastx, 0, 0)
+        self.header_box.addstr("=== {platform} ===".format(platform=platform))
+
+        self.msg_box = curses.newwin(lasty - 4, lastx, 1, 0)
+        self.msg_box.scrollok(True)
+
+        def refresh():
+            while True:
+                self.header_box.refresh()
+                self.msg_box.refresh()
+                self.input_box.refresh()
+                sleep(0.5)
+
+        create_daemon(refresh)
+
+        while True:
+            self.input_box.addstr("Input > ")
+            msg = self.input_box.getstr()
+            if msg:
+                utterance = str(msg.decode("utf-8"))
+                self.msg_box.addstr("You > " + utterance + "\n")
+                msg = {"data": {"utterances": [utterance],
+                                "lang": "en-us"},
+                       "type": "recognizer_loop:utterance",
+                       "context": {"source": self.client.peer,
+                                   "destination": "hive_mind",
+                                   "platform": platform}}
+                self.send_to_hivemind_bus(msg)
+                self.waiting = True
+            self.input_box.clear()
+
+    def run_gui(self):
+        wrapper(self._run_curses_gui)
 
     # parsed protocol messages
     def handle_incoming_mycroft(self, message):
