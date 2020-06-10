@@ -9,6 +9,9 @@ $ pip install HiveMind-cli
 ```
 ## Usage
 
+If host is not provided auto discovery will be used
+
+
 ```bash
 $ HiveMind-cli --help
 
@@ -23,5 +26,15 @@ optional arguments:
   --name NAME           human readable device name
   --host HOST           HiveMind host
   --port PORT           HiveMind port number
+
+```
+
+Default values are
+
+```
+--access_key - "RESISTENCEisFUTILE"
+--crypto_key - "resistanceISfutile"
+--name - "JarbasCliTerminal"
+--port" - 5678
 
 ```
