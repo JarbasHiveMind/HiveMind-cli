@@ -12,8 +12,7 @@ def connect_to_hivemind(host="wss://127.0.0.1",
                         useragent=platform):
     con = HiveMindConnection(host, port)
 
-    terminal = JarbasCliTerminal(con.address,
-                                 crypto_key=crypto_key,
+    terminal = JarbasCliTerminal(crypto_key=crypto_key,
                                  headers=con.get_headers(name, access_key),
                                  useragent=useragent)
 
@@ -52,7 +51,7 @@ def main():
     parser.add_argument("--port", help="HiveMind port number", default=5678)
 
     args = parser.parse_args()
-
+    
     if args.host:
         # Direct Connection
         connect_to_hivemind(args.host, args.port,
