@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='HiveMind-cli',
-    version='0.4.1',
+    version='0.4.2',
     packages=['cli_satellite'],
     url='https://github.com/OpenJarbas/HiveMind-cli',
     license='MIT',
