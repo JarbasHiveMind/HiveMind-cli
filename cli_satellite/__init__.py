@@ -21,13 +21,15 @@ class JarbasCliTerminal(HiveMindTerminal):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.waiting = False
+        self.debug = kwargs.get("debug", False)
 
     # terminal
     def speak(self, utterance):
         print("Mycroft:", utterance)
 
     def on_handled(self):
-        print("DEBUG: Intent handling finished")
+        if self.debug:
+            print("DEBUG: Intent handling finished")
         self.waiting = False
 
     def run_cli(self):
@@ -41,7 +43,8 @@ class JarbasCliTerminal(HiveMindTerminal):
                                "platform": platform}}
             self.send_to_hivemind_bus(msg)
             self.waiting = True
-            print("DEBUG: Waiting for Intent handling, BLOCKING HERE")
+            if self.debug:
+                print("DEBUG: Waiting for Intent handling, BLOCKING HERE")
             while self.waiting:
                 sleep(0.5)
 
