@@ -1,14 +1,14 @@
 from cli_satellite import JarbasCliTerminal, JarbasCursesTerminal
 from jarbas_hive_mind import HiveMindConnection
 from jarbas_hive_mind.discovery import LocalDiscovery
-from jarbas_utils.log import LOG
+from ovos_utils.log import LOG
 from time import sleep
 
 
 def connect_to_hivemind(host="wss://127.0.0.1",
                         port=5678, name="JarbasCliTerminal",
-                        access_key="RESISTENCEisFUTILE",
-                        crypto_key="resistanceISfutile",
+                        access_key="erpDerPerrDurHUr",
+                        crypto_key=None,
                         curses=False):
     con = HiveMindConnection(host, port)
 
@@ -47,9 +47,9 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--access_key", help="access key",
-                        default="RESISTENCEisFUTILE")
+                        default="erpDerPerrDurHUr")
     parser.add_argument("--crypto_key", help="payload encryption key",
-                        default="resistanceISfutile")
+                        default=None)
     parser.add_argument("--name", help="human readable device name",
                         default="JarbasCliTerminal")
     parser.add_argument("--host", help="HiveMind host")
