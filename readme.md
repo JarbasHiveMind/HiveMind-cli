@@ -1,7 +1,8 @@
-# HiveMind - Mycroft Text Client
+# HiveMind - Mycroft Command Line Chat
 
 Command line client for [Mycroft HiveMind](https://github.com/JarbasSkills/skill-hivemind)
 
+![](./cli_terminal.png)
 ![](./remote_cli.png)
 
 ## Install
@@ -27,14 +28,4 @@ optional arguments:
   --name NAME           human readable device name
   --host HOST           HiveMind host
   --port PORT           HiveMind port number
-```
-
-Default values are
-
-```
---access_key - "RESISTENCEisFUTILE"
---crypto_key - "resistanceISfutile"
---name - "JarbasCliTerminal"
---port" - 5678
-
 ```
