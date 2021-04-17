@@ -17,7 +17,8 @@ If host is not provided auto discovery will be used
 ```bash
 $ HiveMind-cli --help
 
-usage: HiveMind-cli [-h] [--access_key ACCESS_KEY] [--crypto_key CRYPTO_KEY] [--name NAME] [--host HOST] [--port PORT]
+usage: HiveMind-cli [-h] [--access_key ACCESS_KEY] [--crypto_key CRYPTO_KEY]
+                   [--name NAME] [--host HOST] [--port PORT] [--curses CURSES]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -28,4 +29,5 @@ optional arguments:
   --name NAME           human readable device name
   --host HOST           HiveMind host
   --port PORT           HiveMind port number
+  --curses CURSES       use curses interface
 ```
