@@ -57,7 +57,7 @@ class JarbasCliTerminal(Thread):
     def run(self):
         print("ask mycroft:")
         while True:
-            utterance = input()
+            utterance = input(">")
             self.say(utterance)
 
     def handle_speak(self, message):
