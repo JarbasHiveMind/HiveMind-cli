@@ -1,1 +1,2 @@
 jarbas_hive_mind>=0.10.1
+jarbas-utils>=0.6.5
