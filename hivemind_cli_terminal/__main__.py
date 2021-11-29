@@ -1,11 +1,11 @@
-from HiveMind_presence import LocalDiscovery
+from hivemind_presence import LocalDiscovery
 from hivemind_cli_terminal import JarbasCliTerminal, JarbasCursesTerminal
 
 
 def connect_to_hivemind(access_key=None,
-                        host="wss://127.0.0.1",
+                        host="ws://127.0.0.1",
                         port=5678,
-                        crypto_key=None,
+                        password=None,
                         curses=False,
                         self_signed=False,
                         bus=None):
@@ -14,14 +14,14 @@ def connect_to_hivemind(access_key=None,
                                         host=host,
                                         port=port,
                                         self_signed=self_signed,
-                                        crypto_key=crypto_key,
+                                        password=password,
                                         bus=bus)
     else:
         terminal = JarbasCliTerminal(access_key,
                                      host=host,
                                      port=port,
                                      self_signed=self_signed,
-                                     crypto_key=crypto_key,
+                                     password=password,
                                      bus=bus)
     # this is a thread, can be set as a daemon
     terminal.start()
@@ -31,11 +31,11 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--access-key", help="access key", required=True)
-    parser.add_argument("--crypto-key", help="payload encryption key", default=None)
+    parser.add_argument("--password", help="password", default=None)
     parser.add_argument("--host", help="HiveMind host")
     parser.add_argument("--port", help="HiveMind port number (default 5678)", default=5678)
     parser.add_argument("--no-curses", help="do not use curses interface", action="store_true")
-    parser.add_argument("--self-signed", help="accept self signed ssl certificates", action="store_true")
+    parser.add_argument("--self-signed", help="accept self sigyned ssl certificates", action="store_true")
 
     args = parser.parse_args()
 
@@ -49,7 +49,7 @@ def main():
         for node in scanner.scan():
             print("Found HiveMind node: ", node.address)
             try:
-                bus = node.connect(args.access_key, args.crypto_key,
+                bus = node.connect(args.access_key, args.password,
                                    useragent=JarbasCliTerminal.platform,
                                    self_signed=args.self_signed)
                 scanner.stop()
@@ -64,7 +64,7 @@ def main():
     connect_to_hivemind(host=args.host,
                         port=args.port,
                         access_key=args.access_key,
-                        crypto_key=args.crypto_key,
+                        password=args.password,
                         self_signed=args.self_signed,
                         curses=not args.no_curses)
 
