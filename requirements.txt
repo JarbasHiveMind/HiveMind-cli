@@ -1,1 +1,1 @@
-jarbas_hive_mind>=0.10.1
+hivemind_bus_client~=0.0.3a2
