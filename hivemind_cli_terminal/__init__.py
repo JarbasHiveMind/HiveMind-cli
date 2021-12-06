@@ -15,30 +15,34 @@ except ImportError:
 class JarbasCliTerminal(Thread):
     platform = "JarbasCliTerminalV0.4"
 
-    def __init__(self, access_key,
+    def __init__(self, access_key=None,
                  host="wss://127.0.0.1",
                  port=5678,
                  crypto_key=None,
                  self_signed=False,
-                 lang="en-us"):
+                 lang="en-us", bus=None):
         super().__init__()
         self.lang = lang
 
-        # connect to hivemind
-        self.bus = HiveMessageBusClient(key=access_key,
-                                        port=port,
-                                        host=host,
-                                        crypto_key=crypto_key,
-                                        ssl=host.startswith("wss:"),
-                                        useragent=self.platform,
-                                        self_signed=self_signed,
-                                        debug=False)
+        if bus:
+            # got a connection already
+            self.bus = bus
+        else:
+            # connect to hivemind
+            self.bus = HiveMessageBusClient(key=access_key,
+                                            port=port,
+                                            host=host,
+                                            crypto_key=crypto_key,
+                                            ssl=host.startswith("wss:"),
+                                            useragent=self.platform,
+                                            self_signed=self_signed,
+                                            debug=False)
 
-        self.bus.run_in_thread()
+            self.bus.run_in_thread()
+            # block until hivemind connects
+            print("Waiting for Hivemind connection")
+            self.bus.connected_event.wait()
 
-        # block until hivemind connects
-        print("Waiting for Hivemind connection")
-        self.bus.connected_event.wait()
         self.bus.on_mycroft("speak", self.handle_speak)
 
     # terminal

@@ -9,7 +9,8 @@ setup(
     author='jarbasAI',
     author_email='jarbasai@mailfence.com',
     description='Mycroft Remote Cli',
-    install_requires=["hivemind_bus_client~=0.0.3a2"],
+    install_requires=["hivemind_bus_client~=0.0.3a2",
+                      "HiveMind_presence~=0.0.2a1"],
     entry_points={
         'console_scripts': [
             'HiveMind-cli=cli_satellite.__main__:main'

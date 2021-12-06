@@ -1,1 +1,2 @@
 hivemind_bus_client~=0.0.3a2
+HiveMind_presence~=0.0.2a1
