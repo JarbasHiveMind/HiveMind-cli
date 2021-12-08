@@ -34,6 +34,8 @@ def main():
     parser.add_argument("--host", help="HiveMind host")
     parser.add_argument("--port", help="HiveMind port number (default 5678)", default=5678)
     parser.add_argument("--no-curses", help="do not use curses interface", action="store_true")
+    parser.add_argument("--self-signed", help="accept self signed ssl certificates", action="store_true")
+
     args = parser.parse_args()
 
     if not args.host:
@@ -46,7 +48,9 @@ def main():
         for node in scanner.scan():
             print("Found HiveMind node: ", node.address)
             try:
-                bus = node.connect(args.access_key, args.crypto_key)
+                bus = node.connect(args.access_key, args.crypto_key,
+                                   useragent=JarbasCliTerminal.platform,
+                                   self_signed=args.self_signed)
                 scanner.stop()
                 connect_to_hivemind(curses=not args.no_curses, bus=bus)
             except:
