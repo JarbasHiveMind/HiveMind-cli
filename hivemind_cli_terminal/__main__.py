@@ -7,19 +7,20 @@ def connect_to_hivemind(access_key=None,
                         port=5678,
                         crypto_key=None,
                         curses=False,
+                        self_signed=False,
                         bus=None):
     if curses:
         terminal = JarbasCursesTerminal(access_key,
                                         host=host,
                                         port=port,
-                                        self_signed=True,
+                                        self_signed=self_signed,
                                         crypto_key=crypto_key,
                                         bus=bus)
     else:
         terminal = JarbasCliTerminal(access_key,
                                      host=host,
                                      port=port,
-                                     self_signed=True,
+                                     self_signed=self_signed,
                                      crypto_key=crypto_key,
                                      bus=bus)
     # this is a thread, can be set as a daemon
@@ -64,6 +65,7 @@ def main():
                         port=args.port,
                         access_key=args.access_key,
                         crypto_key=args.crypto_key,
+                        self_signed=args.self_signed,
                         curses=not args.no_curses)
 
 
