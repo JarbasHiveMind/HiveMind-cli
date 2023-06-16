@@ -13,7 +13,7 @@ setup(
                       "HiveMind_presence~=0.0.2a1"],
     entry_points={
         'console_scripts': [
-            'HiveMind-cli=cli_satellite.__main__:main'
+            'hivemind-cli=hivemind_cli_terminal.__main__:main'
         ]
     }
 )
