@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: HiveMind-cli
+Version: 0.5.0a2
+Summary: Mycroft Remote Cli
+Home-page: https://github.com/OpenJarbas/HiveMind-cli
+Author: jarbasAI
+Author-email: jarbasai@mailfence.com
+License: MIT
+License-File: LICENSE
+Requires-Dist: hivemind_bus_client>=0.0.3a2
+Requires-Dist: HiveMind_presence>=0.0.2a2
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary

@@ -1,0 +1,11 @@
+LICENSE
+setup.py
+HiveMind_cli.egg-info/PKG-INFO
+HiveMind_cli.egg-info/SOURCES.txt
+HiveMind_cli.egg-info/dependency_links.txt
+HiveMind_cli.egg-info/entry_points.txt
+HiveMind_cli.egg-info/requires.txt
+HiveMind_cli.egg-info/top_level.txt
+hivemind_cli_terminal/__init__.py
+hivemind_cli_terminal/__main__.py
+hivemind_cli_terminal/version.py
