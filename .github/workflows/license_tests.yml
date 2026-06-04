@@ -8,3 +8,6 @@ on:
 jobs:
   license_check:
     uses: OpenVoiceOS/gh-automations/.github/workflows/license-check.yml@dev
+    with:
+      # orjson is Apache+MIT+MPL-2.0; MPL is file-level copyleft, safe as library
+      exclude_packages: "^orjson$"
