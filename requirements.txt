@@ -1,2 +1,3 @@
-hivemind_bus_client>=0.0.3a2
+hivemind_bus_client>=0.4.4,<1.0.0
 HiveMind_presence>=0.0.2a2
+ovos-bus-client>=0.0.8,<1.0.0
