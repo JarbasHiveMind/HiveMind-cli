@@ -1,1 +1,1 @@
-pytest_plugins = ['hivescope.pytest_fixtures']
+# pytest_plugins must live in the root conftest.py (non-top-level not supported)
