@@ -1,24 +1,21 @@
 # Changelog
 
-## [Unreleased](https://github.com/JarbasHiveMind/HiveMind-cli/tree/HEAD)
+## [0.5.0a3](https://github.com/JarbasHiveMind/HiveMind-cli/tree/0.5.0a3) (2026-06-05)
 
-[Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/09e66029411d119c72f41c8e7eb48fa85fbbd39f...HEAD)
+[Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/V0.5.0a2...0.5.0a3)
+
+**Merged pull requests:**
+
+- feat: modernize CI to gh-automations@dev and add ACL e2e tests [\#24](https://github.com/JarbasHiveMind/HiveMind-cli/pull/24) ([JarbasAl](https://github.com/JarbasAl))
+- Configure Renovate [\#16](https://github.com/JarbasHiveMind/HiveMind-cli/pull/16) ([renovate[bot]](https://github.com/apps/renovate))
+
+## [V0.5.0a2](https://github.com/JarbasHiveMind/HiveMind-cli/tree/V0.5.0a2) (2023-08-03)
+
+[Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/09e66029411d119c72f41c8e7eb48fa85fbbd39f...V0.5.0a2)
 
 **Implemented enhancements:**
 
-- feature - add curses support [\#1](https://github.com/JarbasHiveMind/HiveMind-cli/issues/1)
 - refactor/hivemind-bus-client [\#11](https://github.com/JarbasHiveMind/HiveMind-cli/pull/11) ([JarbasAl](https://github.com/JarbasAl))
-
-**Fixed bugs:**
-
-- Cli interface answers first question then goes silent/ freezes [\#9](https://github.com/JarbasHiveMind/HiveMind-cli/issues/9)
-- Cannot stop HiveMind-cli if misconfigured [\#5](https://github.com/JarbasHiveMind/HiveMind-cli/issues/5)
-- Migrate jarbas\_utils to ovos\_utils and add zeroconf to deps [\#4](https://github.com/JarbasHiveMind/HiveMind-cli/issues/4)
-
-**Closed issues:**
-
-- ModuleNotFoundError: No module named 'cli\_satellite' [\#13](https://github.com/JarbasHiveMind/HiveMind-cli/issues/13)
-- Can't Connect from mac to Raspberry running Hivemind-cli- Does this look like a valid address? [\#8](https://github.com/JarbasHiveMind/HiveMind-cli/issues/8)
 
 **Merged pull requests:**
 
