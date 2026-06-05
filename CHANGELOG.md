@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0a4](https://github.com/JarbasHiveMind/HiveMind-cli/tree/0.5.0a4) (2026-06-05)
+
+[Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/0.5.0a3...0.5.0a4)
+
+**Merged pull requests:**
+
+- Update dependency hivescope to v0.3.0a3 [\#26](https://github.com/JarbasHiveMind/HiveMind-cli/pull/26) ([renovate[bot]](https://github.com/apps/renovate))
+
 ## [0.5.0a3](https://github.com/JarbasHiveMind/HiveMind-cli/tree/0.5.0a3) (2026-06-05)
 
 [Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/V0.5.0a2...0.5.0a3)
