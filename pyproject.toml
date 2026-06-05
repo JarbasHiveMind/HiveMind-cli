@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "HiveMind-cli"
+description = "Terminal client for HiveMind — send utterances and inspect the bus from the command line"
+readme = "README.md"
+authors = [{ name = "jarbasAI", email = "jarbasai@mailfence.com" }]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+dynamic = ["version", "dependencies"]
+
+[project.optional-dependencies]
+test = ["pytest", "hivescope==0.3.0a1"]
+
+[project.urls]
+Homepage = "https://github.com/JarbasHiveMind/HiveMind-cli"
+
+[project.scripts]
+hivemind-cli = "hivemind_cli_terminal.__main__:main"
+
+[tool.setuptools]
+packages = ["hivemind_cli_terminal"]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = { attr = "hivemind_cli_terminal.version.__version__" }
+dependencies = { file = ["requirements.txt"] }
