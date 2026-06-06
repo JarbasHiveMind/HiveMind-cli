@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1a1](https://github.com/JarbasHiveMind/HiveMind-cli/tree/0.5.1a1) (2026-06-06)
+
+[Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/0.5.0a4...0.5.1a1)
+
+**Merged pull requests:**
+
+- fix\(deps\): require ovos-bus-client\>=2.0.0a3 [\#28](https://github.com/JarbasHiveMind/HiveMind-cli/pull/28) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.5.0a4](https://github.com/JarbasHiveMind/HiveMind-cli/tree/0.5.0a4) (2026-06-05)
 
 [Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/0.5.0a3...0.5.0a4)
