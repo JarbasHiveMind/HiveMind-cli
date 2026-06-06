@@ -1,4 +1,4 @@
 hivemind_bus_client>=0.4.4,<1.0.0
 HiveMind_presence>=0.0.2a2
-ovos-bus-client>=1.5.0,<2.0.0
+ovos-bus-client>=2.0.0a3
 ovos-spec-tools
