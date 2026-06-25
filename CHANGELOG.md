@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0a1](https://github.com/JarbasHiveMind/HiveMind-cli/tree/1.0.0a1) (2026-06-25)
+
+[Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/0.5.1a1...1.0.0a1)
+
+**Breaking changes:**
+
+- feat!: modernize onto the HiveMind bus-client 2.x stack [\#30](https://github.com/JarbasHiveMind/HiveMind-cli/pull/30) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.5.1a1](https://github.com/JarbasHiveMind/HiveMind-cli/tree/0.5.1a1) (2026-06-06)
 
 [Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/0.5.0a4...0.5.1a1)
