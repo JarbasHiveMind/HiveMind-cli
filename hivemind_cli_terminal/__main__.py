@@ -54,7 +54,7 @@ def main():
                                    self_signed=args.self_signed)
                 scanner.stop()
                 connect_to_hivemind(curses=not args.no_curses, bus=bus)
-            except:
+            except Exception:
                 print("failed to connect!")
         exit(2)
     elif not args.host.startswith("ws"):

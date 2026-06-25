@@ -1,31 +1,17 @@
 """
-OVOS-BRIDGE-1 conformance template.
+OVOS-BRIDGE-1 conformance for HiveMind-cli.
 
-Copy this file into your repo's ``tests/e2e/`` directory and adapt it to
-your bridge implementation.  Each test group directly maps to one normative
-clause of OVOS-BRIDGE-1, SESSION-1, or SESSION-2.
-
-Usage:
-    cp templates/test_template_bridge1.py <your-repo>/tests/e2e/test_bridge1_conformance.py
-
-The tests use the hivescope in-process harness — no real WebSocket server
-is needed.  See hivescope README for installation.
-
-Skipif pattern
---------------
-Tests that depend on the policy admission chain (BRIDGE-1 §4.2) are gated
-with ``@_requires_policy_chain`` so they pass on released core and activate
-automatically once ``hivemind_core.policy`` (core#89) is installed.
-
-Source/destination/session-fidelity/FIFO tests do NOT use a skipif guard;
-they must pass on released core.
+Each test group maps directly to one normative clause of OVOS-BRIDGE-1,
+SESSION-1, or SESSION-2, exercised through the hivescope harness against a real
+hivemind-core master. The full policy stack (``hivemind_core.policy`` +
+``hivemind_ovos_agent_plugin``) is a hard dependency of the ``[e2e]`` extra, so
+these tests always run — no deps are mocked or skipped.
 """
 
-import importlib.util
 import time
 
 import pytest
-from hivemind_bus_client.message import HiveMessage, HiveMessageType
+from hivemind_bus_client.message import HiveMessageType
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
 
@@ -39,25 +25,8 @@ from hivescope.assertions import (
     assert_fifo_order,
     assert_session_propagated_unchanged,
     assert_source_hidden,
-    assert_session_blacklists_injected,
 )
-from hivescope.scenarios import single_satellite, three_satellites, chain_topology
-
-# ---------------------------------------------------------------------------
-# Skipif markers — copy these into your test file unchanged.
-# ---------------------------------------------------------------------------
-
-_HAS_POLICY_CHAIN = importlib.util.find_spec("hivemind_core.policy") is not None
-_HAS_OVOS_POLICY = importlib.util.find_spec("hivemind_ovos_agent_plugin") is not None
-
-_requires_policy_chain = pytest.mark.skipif(
-    not _HAS_POLICY_CHAIN,
-    reason="policy admission chain (HiveMind-core#89) not installed",
-)
-_requires_ovos_policy = pytest.mark.skipif(
-    not (_HAS_POLICY_CHAIN and _HAS_OVOS_POLICY),
-    reason="OVOSAgentPolicy (hivemind-ovos-agent-plugin#3) + core#89 not installed",
-)
+from hivescope.scenarios import chain_topology
 
 
 # ---------------------------------------------------------------------------
