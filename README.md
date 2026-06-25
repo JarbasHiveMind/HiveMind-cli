@@ -9,6 +9,8 @@ hive**: the "hello world" of HiveMind clients.
 The curses UI shows a split-pane conversation view. `--no-curses` streams plain
 output, which is useful for scripting or SSH sessions with minimal terminal support.
 
+![HiveMind CLI terminal](./cli_terminal.png)
+
 ## Where it fits — the satellite spectrum
 
 | Client | Local processing | Remote processing |
@@ -26,6 +28,18 @@ engine. Every other satellite adds layers on top of this foundation.
 ```bash
 pip install HiveMind-cli
 ```
+
+From source:
+
+```bash
+git clone https://github.com/JarbasHiveMind/HiveMind-cli
+cd HiveMind-cli
+pip install -e .
+```
+
+HiveMind CLI tracks the **HiveMind bus-client 2.x** stack (`ovos-bus-client>=2.0`).
+`pyproject.toml` is the single source of truth for dependencies — there is no
+`requirements.txt`.
 
 ## Quickstart
 
@@ -88,7 +102,22 @@ scripting.
 
 ## Docs
 
-Full documentation lives in [`docs/`](docs/index.md).
+Full documentation lives in [`docs/`](docs/index.md). Contributors should read
+[`docs/development.md`](docs/development.md) for the dependency stack and how to run
+the end-to-end test suite.
+
+## Testing
+
+The end-to-end suite boots a real `hivemind-core` master in-process (via
+[hivescope](https://github.com/JarbasHiveMind/hivescope)) and drives the real
+terminal client over a real bus — only stdin/stdout is mocked:
+
+```bash
+pip install -e ".[e2e]"
+pytest tests/
+```
+
+See [`docs/development.md`](docs/development.md) for details.
 
 ## License
 

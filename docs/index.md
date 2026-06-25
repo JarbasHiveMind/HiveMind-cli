@@ -32,6 +32,7 @@ works.
 | [Configuration](configuration.md) | All users | Every CLI flag, wss vs ws, ports, self-signed certs, scripting |
 | [Architecture](architecture.md) | Developers | Wire protocol, HiveMessage anatomy, session identity, auth |
 | [Usage](usage.md) | All users | Practical recipes: skill testing, debugging, SSH, scripting, accessibility |
+| [Development & Testing](development.md) | Developers | Install from source, the bus-client 2.x stack, running the e2e suite, CI |
 | [Troubleshooting](troubleshooting.md) | All users | Connection errors, SSL, auth failures, curses rendering issues |
 
 ## Quick reference

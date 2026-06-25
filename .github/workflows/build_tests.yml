@@ -10,6 +10,7 @@ jobs:
     uses: OpenVoiceOS/gh-automations/.github/workflows/build-tests.yml@dev
     with:
       python_versions: '["3.10", "3.11", "3.12", "3.13"]'
-      # full policy stack for e2e ACL tests; hivemind-core git pin until #89 merges
-      pre_install_pip: '"hivescope==0.3.0a1" "hivemind-plugin-manager==0.6.0a1" "hivemind-ovos-agent-plugin==0.2.0a1" "hivemind-core==4.3.0a2"'
+      # the [e2e] extra pins the full bus-client 2.x stack (hivescope, hivemind-core,
+      # policy plugins) as prerelease floors — no pre_install_pip / --pre needed
+      install_extras: 'e2e'
       test_path: 'tests/'
