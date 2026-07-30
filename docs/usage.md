@@ -12,11 +12,11 @@ Connect to the hive and exercise the skill interactively:
 hivemind-cli --access-key <key> --password <pw> --host wss://192.168.1.10
 ```
 
-Type utterances that target the skill. The hive runs intent matching server-side;
-you see the response immediately without needing audio hardware on the client.
+Type utterances that target the skill. The hive runs intent matching server-side.
+You see the response immediately without needing audio hardware on the client.
 
-This is the fastest feedback loop for skill development: no microphone accuracy
-issues, no TTS delays, just raw intent + response.
+This gives a quick feedback loop for skill development, with no microphone
+accuracy issues and no TTS delay: only the intent match and the response.
 
 ---
 
@@ -106,19 +106,18 @@ subnet) and requires the hive node to have presence/discovery enabled.
 
 ---
 
-## Accessibility — keyboard-only voice assistant
+## Accessibility: a keyboard-only interface
 
-HiveMind CLI is the most accessible interface to a HiveMind hive:
+HiveMind CLI needs no audio hardware:
 
-- No audio hardware required.
 - Full keyboard operation.
 - Screen-reader compatible in `--no-curses` mode (plain stdout).
 - Works over SSH, so it runs on any device that can open a shell.
-- Latency is network + intent processing only — no STT/TTS round-trips.
+- Latency is network and intent processing only, with no STT/TTS round trip.
 
-For users who prefer text over audio, or in situations where audio is impractical
-(open offices, noisy environments, hearing impairments), the CLI provides a complete
-interface to all hive skills.
+For users who prefer text over audio, or in situations where audio is impractical,
+such as open offices, noisy environments, or hearing impairments, the CLI gives a
+full interface to all hive skills.
 
 To use it as a persistent assistant in a terminal multiplexer:
 
@@ -128,3 +127,6 @@ hivemind-cli --access-key <key> --password <pw> --host wss://192.168.1.10
 ```
 
 The session persists across disconnects as long as the multiplexer session is alive.
+
+---
+[← Architecture](architecture.md) · [Home](index.md) · [Development & Testing →](development.md)

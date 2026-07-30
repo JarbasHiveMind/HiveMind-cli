@@ -1,14 +1,14 @@
-# HiveMind CLI — Documentation
+# HiveMind CLI Documentation
 
 HiveMind CLI (`hivemind-cli`) is the text-only terminal client for
 [HiveMind](https://github.com/JarbasHiveMind/HiveMind-core). It connects to a hive
-over WebSocket and lets you type utterances from the command line — no microphone,
-no speaker, no wake-word engine required.
+over WebSocket and lets you type utterances from the command line. No microphone,
+speaker, or wake-word engine is required.
 
-It is the **best first step** to understand HiveMind: the minimum surface needed to
-speak to a hive is one access key and a network connection. Every concept that
-matters (pairing, the wire protocol, session identity, how responses come back) is
-visible here before audio hardware is introduced.
+Start here to understand HiveMind. The minimum surface needed to speak to a hive
+is one access key and a network connection. Every concept that matters, including
+pairing, the wire protocol, session identity, and how responses come back, is
+visible here before audio hardware enters the picture.
 
 ## The satellite spectrum
 
@@ -19,10 +19,10 @@ visible here before audio hardware is introduced.
 | [HiveMind-voice-relay](https://github.com/JarbasHiveMind/HiveMind-voice-relay) | mic · VAD · wake-word | STT · TTS · intent · skills |
 | [HiveMind-voice-sat](https://github.com/JarbasHiveMind/HiveMind-voice-sat) | mic · VAD · wake-word · STT · TTS | intent · skills |
 
-HiveMind-cli sits at the thin end of this spectrum: it is a pure keyboard interface.
-Audio satellites all build on top of the same connection and wire protocol; reading
-the CLI code is the clearest path to understanding how the client side of HiveMind
-works.
+HiveMind-cli sits at the thin end of this spectrum. It is a pure keyboard
+interface. Audio satellites all build on top of the same connection and wire
+protocol. Reading the CLI code is the clearest path to understanding how the
+client side of HiveMind works.
 
 ## Documentation pages
 

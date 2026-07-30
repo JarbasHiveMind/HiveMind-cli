@@ -18,7 +18,7 @@ hivemind-cli --access-key <key> --host wss://192.168.1.10
 
 ---
 
-## Cannot connect — connection refused or timeout
+## Cannot connect: connection refused or timeout
 
 **Check the port.** HiveMind-core defaults to `5678`. If your server uses a
 different port, pass `--port`:
@@ -136,3 +136,6 @@ hivemind-cli --access-key <key> --host ws://192.168.1.10
 
 You answered `n` (or anything not starting with `y`) when asked whether to scan.
 Either re-run with `--host`, or run again and answer `y` to the scan prompt.
+
+---
+[← Development & Testing](development.md) · [Home](index.md)

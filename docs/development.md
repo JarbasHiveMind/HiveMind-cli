@@ -13,14 +13,14 @@ cd HiveMind-cli
 pip install -e .
 ```
 
-`pyproject.toml` is the single source of truth for packaging — there is no
+`pyproject.toml` is the single source of truth for packaging. There is no
 `requirements.txt`, `setup.py`, or `setup.cfg`. Runtime dependencies live in
-`[project.dependencies]`; test dependencies live in the `[project.optional-dependencies]`
-extras described below.
+`[project.dependencies]`. Test dependencies live in the
+`[project.optional-dependencies]` extras described below.
 
 ---
 
-## Dependency stack — HiveMind bus 2.x
+## Dependency stack: HiveMind bus 2.x
 
 HiveMind CLI tracks the **HiveMind bus-client 2.x** stack. The pinned floors are
 prereleases, declared as minimum versions so a normal resolver picks them up with
@@ -82,7 +82,7 @@ pytest tests/e2e/test_cli_client.py
 
 ## How the end-to-end tests work
 
-The e2e tests are **real**, not mocked transports:
+The e2e tests use real transports, not mocks:
 
 1. [hivescope](https://github.com/JarbasHiveMind/hivescope) boots a real
    `hivemind-core` master **in-process** over a loopback WebSocket server
@@ -91,15 +91,15 @@ The e2e tests are **real**, not mocked transports:
 3. The real `JarbasCliTerminal` connects to that loopback URL through a real
    `HiveMessageBusClient`, completing the full handshake.
 4. The test drives the terminal:
-   - **stdin is mocked** — instead of a blocking `input()` call, the test calls the
+   - **stdin is mocked.** Instead of a blocking `input()` call, the test calls the
      same `say()` path the run loop uses per typed line.
-   - **stdout is mocked** — `terminal.speak` is replaced with a list `.append`, so
+   - **stdout is mocked.** `terminal.speak` is replaced with a list `.append`, so
      the test asserts on exactly what the user would have seen rendered, with no TTY.
-5. Assertions confirm that a typed utterance reaches the hub's OVOS agent bus, and
-   that a `speak` emitted by the hub is rendered back at the terminal.
+5. Assertions confirm that a typed utterance reaches the hive's OVOS agent bus, and
+   that a `speak` message emitted by the hive is rendered back at the terminal.
 
-There is no network beyond the localhost loopback socket, and no `importorskip` /
-`skipif` guards — the `[e2e]` extra installs the entire stack, so every test runs
+There is no network beyond the localhost loopback socket, and no `importorskip` or
+`skipif` guards. The `[e2e]` extra installs the entire stack, so every test runs
 for real on every CI run.
 
 ---
@@ -121,5 +121,8 @@ workflows (referenced `@dev`):
 | `repo_health` | Checks required files are present |
 | `release_workflow` / `publish_stable` | Alpha release on merge to `dev`, stable on merge to `master` |
 
-Versions bump automatically from conventional-commit prefixes — never hand-edit
+Versions bump automatically from conventional-commit prefixes. Never hand-edit
 `hivemind_cli_terminal/version.py`.
+
+---
+[← Usage](usage.md) · [Home](index.md) · [Troubleshooting →](troubleshooting.md)
