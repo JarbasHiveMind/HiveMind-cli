@@ -6,9 +6,9 @@ All options are passed directly to `hivemind-cli`.
 
 ### `--access-key` *(required)*
 
-The client access key issued by `hivemind-core add-client`. Passed verbatim to
-`HiveMessageBusClient` as the identity credential. There is no default — the CLI
-refuses to start without it.
+The client access key issued by `hivemind-core add-client`. The CLI passes it
+verbatim to `HiveMessageBusClient` as the identity credential. There is no
+default. The CLI refuses to start without it.
 
 ### `--password`
 
@@ -28,8 +28,8 @@ ws://127.0.0.1           # loopback (local testing)
 The CLI validates the prefix at startup and exits with code `1` if it is missing.
 
 If `--host` is omitted entirely, the CLI prompts for a local-network scan using
-`hivemind_presence.LocalDiscovery` (UDP broadcast). Answering `y` starts the scan;
-each discovered node is printed and a connection is attempted.
+`hivemind_presence.LocalDiscovery` (UDP broadcast). Answering `y` starts the scan.
+The CLI prints each discovered node and attempts a connection.
 
 ### `--port`
 
@@ -78,11 +78,11 @@ hivemind-cli --access-key <key> --host wss://192.168.1.10 --self-signed
 
 | Scheme | When to use |
 |---|---|
-| `wss://` | Production, any deployment where traffic leaves the local machine. Certificate verification is on by default; add `--self-signed` for home CAs. |
+| `wss://` | Production, any deployment where traffic leaves the local machine. Certificate verification is on by default. Add `--self-signed` for home CAs. |
 | `ws://` | Local development only (`ws://127.0.0.1`). Never send credentials over unencrypted WebSocket on a shared network. |
 
-HiveMind-core listens on port `5678` for both schemes by default; the scheme choice
-is on the client side.
+HiveMind-core listens on port `5678` for both schemes by default. The client
+chooses the scheme.
 
 ---
 
@@ -105,3 +105,6 @@ hivemind-cli --access-key <key> --host ws://127.0.0.1 --no-curses < utterances.t
 ```
 
 The process exits only when stdin is closed (EOF), so pipe accordingly.
+
+---
+[← Getting started](getting-started.md) · [Home](index.md) · [Architecture →](architecture.md)

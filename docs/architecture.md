@@ -1,9 +1,9 @@
 # Architecture
 
-This page is aimed at developers who want to understand the HiveMind client
-protocol by reading the simplest possible implementation. HiveMind CLI is that
-implementation — no audio pipeline, no wake-word engine, just the raw connection
-and message exchange.
+This page is for developers who want to understand the HiveMind client protocol
+by reading the simplest implementation. HiveMind CLI is that implementation. It
+has no audio pipeline and no wake-word engine, only the raw connection and
+message exchange.
 
 ---
 
@@ -66,20 +66,20 @@ self.bus.emit(Message(
 
 Key points:
 
-- **Message type** is `recognizer_loop:utterance` — the same message type that the
-  OVOS voice pipeline produces after STT. The hive receives this and processes it
-  identically to a spoken utterance. No special HiveMind-specific message type is
-  needed; the bridge translates the `destination: hive` context to route it
+- **Message type** is `recognizer_loop:utterance`, the same message type the OVOS
+  voice pipeline produces after STT. The hive receives this and processes it the
+  same way it processes a spoken utterance. No HiveMind-specific message type is
+  needed. The bridge translates the `destination: hive` context to route it
   correctly.
-- **`lang`** defaults to `"en-us"`. There is currently no CLI flag to override it;
-  the `JarbasCliTerminal.__init__` signature accepts a `lang` parameter for
+- **`lang`** defaults to `"en-us"`. No CLI flag overrides it. The
+  `JarbasCliTerminal.__init__` signature accepts a `lang` parameter for
   programmatic use.
 - **`destination: hive`** in the context tells `HiveMessageBusClient` to route the
   message upstream to the hive node rather than handling it locally.
 
 This is the minimal HiveMind client action: construct a `recognizer_loop:utterance`
 Message, set `destination: hive`, emit it. Every voice satellite does the same
-thing — just with audio-derived text instead of keyboard-derived text.
+thing, with audio-derived text instead of keyboard-derived text.
 
 ---
 
@@ -122,7 +122,7 @@ sets up three windows:
 |---|---|---|
 | `header_box` | top row | Displays the platform identifier string. |
 | `msg_box` | rows 1 … height-4 | Scrollable conversation history (`scrollok=True`). |
-| `input_box` | bottom 3 rows | `Input > ` prompt; `getstr()` for one line at a time. |
+| `input_box` | bottom 3 rows | `Input > ` prompt, using `getstr()` for one line at a time. |
 
 `curses.echo()` is set so typed characters appear on screen. After each `getstr()`
 call, the input is decoded from bytes to UTF-8, echoed into `msg_box` as
@@ -158,4 +158,7 @@ The core of a HiveMind client is five lines:
 5. Loop.
 
 Audio satellites add STT before step 4 and TTS after step 3. Everything else is
-the same. Reading this codebase first makes those satellites immediately legible.
+the same. Reading this codebase first makes those satellites easier to follow.
+
+---
+[← Configuration](configuration.md) · [Home](index.md) · [Usage →](usage.md)

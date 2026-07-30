@@ -32,7 +32,7 @@ HiveMind-core and run:
 hivemind-core add-client
 ```
 
-The command prints an **Access Key** and a **Password**. Copy both — you will pass
+The command prints an **Access Key** and a **Password**. Copy both. You will pass
 them to the CLI.
 
 ---
@@ -91,7 +91,7 @@ You > what time is it
 Mycroft > It's 3:45 PM.
 ```
 
-That's it — you are talking to your hive.
+You are now talking to your hive.
 
 ---
 
@@ -107,9 +107,12 @@ Press **Ctrl-C** to disconnect and exit.
 2. Your typed line was wrapped in a `recognizer_loop:utterance` HiveMessage and
    sent to the hive.
 3. The hive ran intent matching and skill execution on the server side.
-4. The skill's `speak()` call produced a `speak` message that travelled back over
+4. The skill's `speak()` call produced a `speak` message that traveled back over
    the WebSocket.
 5. The CLI rendered it in the message pane.
 
 No audio ever left your machine. See [Architecture](architecture.md) for the full
 picture of what happens on the wire.
+
+---
+[Home](index.md) · [Configuration →](configuration.md)
