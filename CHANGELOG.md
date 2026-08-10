@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0a3](https://github.com/JarbasHiveMind/HiveMind-cli/tree/1.0.0a3) (2026-08-10)
+
+[Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/1.0.0a2...1.0.0a3)
+
+**Merged pull requests:**
+
+- docs: correct claims that no longer match the code [\#34](https://github.com/JarbasHiveMind/HiveMind-cli/pull/34) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [1.0.0a2](https://github.com/JarbasHiveMind/HiveMind-cli/tree/1.0.0a2) (2026-07-30)
 
 [Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/1.0.0a1...1.0.0a2)
