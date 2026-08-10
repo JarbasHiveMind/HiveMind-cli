@@ -71,8 +71,10 @@ hivemind-cli --access-key <key> --host ws://127.0.0.1 --no-curses \
   > responses.txt
 ```
 
-The process reads until EOF, so the file approach terminates naturally when input
-is exhausted.
+The reader loop is `while True: input()` with no `EOFError` handling, so the
+process ends with a traceback when the piped input runs out. The responses are
+already written at that point; ignore the traceback or drop it with
+`2>/dev/null`.
 
 Automated regression test pattern:
 

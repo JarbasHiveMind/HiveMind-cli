@@ -69,16 +69,15 @@ Key points:
 - **Message type** is `recognizer_loop:utterance`, the same message type the OVOS
   voice pipeline produces after STT. The hive receives this and processes it the
   same way it processes a spoken utterance. No HiveMind-specific message type is
-  needed. The bridge translates the `destination: hive` context to route it
-  correctly.
+  needed.
 - **`lang`** defaults to `"en-us"`. No CLI flag overrides it. The
   `JarbasCliTerminal.__init__` signature accepts a `lang` parameter for
   programmatic use.
-- **`destination: hive`** in the context tells `HiveMessageBusClient` to route the
-  message upstream to the hive node rather than handling it locally.
+- **`destination: hive`** is a context marker only. Nothing in the client branches
+  on it: `HiveMessageBusClient.emit` sends every BUS message upstream.
 
 This is the minimal HiveMind client action: construct a `recognizer_loop:utterance`
-Message, set `destination: hive`, emit it. Every voice satellite does the same
+Message and emit it. Every voice satellite does the same
 thing, with audio-derived text instead of keyboard-derived text.
 
 ---
