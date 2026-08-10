@@ -104,7 +104,9 @@ Batch a list of utterances from a file:
 hivemind-cli --access-key <key> --host ws://127.0.0.1 --no-curses < utterances.txt
 ```
 
-The process exits only when stdin is closed (EOF), so pipe accordingly.
+The process reads until stdin closes. It does not handle `EOFError`, so it ends
+with a traceback rather than a clean exit. Add `2>/dev/null` if the traceback
+gets in the way.
 
 ---
 [← Getting started](getting-started.md) · [Home](index.md) · [Architecture →](architecture.md)
