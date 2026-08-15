@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0a4](https://github.com/JarbasHiveMind/HiveMind-cli/tree/1.0.0a4) (2026-08-15)
+
+[Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/1.0.0a3...1.0.0a4)
+
+**Merged pull requests:**
+
+- docs: add AGENTS.md with per-repo agent conventions [\#36](https://github.com/JarbasHiveMind/HiveMind-cli/pull/36) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [1.0.0a3](https://github.com/JarbasHiveMind/HiveMind-cli/tree/1.0.0a3) (2026-08-10)
 
 [Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/1.0.0a2...1.0.0a3)
