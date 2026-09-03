@@ -58,9 +58,9 @@ Use this flag when:
 echo "what time is it" | hivemind-cli --access-key <key> --host ws://127.0.0.1 --no-curses
 ```
 
-Note: if `curses` is not importable (not installed), `JarbasCursesTerminal` is
-silently aliased to `JarbasCliTerminal`, so `--no-curses` is redundant in that
-environment.
+Note: if `curses` is not importable (not installed), the CLI prints
+`WARNING: curses interface not available` at startup and `JarbasCursesTerminal` is
+aliased to `JarbasCliTerminal`, so `--no-curses` is redundant in that environment.
 
 ### `--self-signed`
 
