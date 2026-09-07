@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "HiveMind-cli"
+description = "Terminal client for HiveMind — send utterances and inspect the bus from the command line"
+readme = "README.md"
+authors = [{ name = "jarbasAI", email = "jarbasai@mailfence.com" }]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+dynamic = ["version"]
+dependencies = [
+    # HiveMind bus stack — prerelease floor pins (resolved with no --pre)
+    "hivemind-bus-client>=1.0.16a1",
+    "hivemind-presence>=0.0.5a2",
+    "ovos-bus-client>=2.9.1a1",
+    "ovos-spec-tools>=0.8.0a1",
+]
+
+[project.optional-dependencies]
+# End-to-end test stack: hivescope boots a real hivemind-core master in-process
+# (loopback WebSocket) and drives the real CLI client over a real bus client.
+# Prerelease floor pins keep the whole graph on the bus-client stack with no
+# --pre flag required.
+e2e = [
+    "pytest",
+    "hivescope>=0.8.0a1",
+    "hivemind-core>=4.13.18a1",
+    "hivemind-plugin-manager>=0.9.0a7",
+    "hivemind-ovos-agent-plugin>=0.3.10a1",
+]
+# License-compliance test deps (license_tests.py).
+license = [
+    "pytest",
+    "lichecker",
+]
+# Back-compat alias: `pip install -e .[test]` == the e2e stack.
+test = [
+    "HiveMind-cli[e2e]",
+]
+
+[project.urls]
+Homepage = "https://github.com/JarbasHiveMind/HiveMind-cli"
+
+[project.scripts]
+hivemind-cli = "hivemind_cli_terminal.__main__:main"
+
+[tool.setuptools]
+packages = ["hivemind_cli_terminal"]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = { attr = "hivemind_cli_terminal.version.__version__" }
