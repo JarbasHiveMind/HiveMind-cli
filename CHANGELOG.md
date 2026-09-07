@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1a2](https://github.com/JarbasHiveMind/HiveMind-cli/tree/1.0.1a2) (2026-09-07)
+
+[Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/1.0.1a1...1.0.1a2)
+
+**Merged pull requests:**
+
+- docs: curses-unavailable fallback prints a warning, is not silent [\#40](https://github.com/JarbasHiveMind/HiveMind-cli/pull/40) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [1.0.1a1](https://github.com/JarbasHiveMind/HiveMind-cli/tree/1.0.1a1) (2026-09-01)
 
 [Full Changelog](https://github.com/JarbasHiveMind/HiveMind-cli/compare/1.0.0a4...1.0.1a1)
