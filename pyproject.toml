@@ -52,3 +52,11 @@ include-package-data = true
 
 [tool.setuptools.dynamic]
 version = { attr = "hivemind_cli_terminal.version.__version__" }
+
+[tool.pytest.ini_options]
+# hivescope's fixtures used to load through `pytest_plugins` in a conftest.py
+# at the repository ROOT. pytest only accepts that key in a top-level conftest,
+# and a conftest at the root puts the root on sys.path, which shadows the
+# installed wheel with the working tree. `-p` loads the same plugin with no
+# file at the root.
+addopts = "-p hivescope.pytest_fixtures"
