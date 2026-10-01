@@ -1,6 +1,3 @@
-pytest_plugins = ['hivescope.pytest_fixtures']
-
-
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
     """Warn loudly when an xfail-marked test starts passing (flip the marker)."""
     xpassed = terminalreporter.stats.get("xpassed", [])
