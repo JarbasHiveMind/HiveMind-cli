@@ -1,8 +1,9 @@
 from threading import Thread
 
-from mycroft_bus_client import Message
-
-from hivemind_bus_client import HiveMessageBusClient
+from hivemind_bus_client.client import HiveMessageBusClient
+from hivemind_bus_client.identity import NodeIdentity
+from ovos_bus_client import Message
+from ovos_utils.log import LOG
 
 try:
     from curses import wrapper
@@ -11,16 +12,18 @@ except ImportError:
     print("WARNING: curses interface not available")
     curses = None
 
+LOG.set_level("ERROR")
+
 
 class JarbasCliTerminal(Thread):
-    platform = "JarbasCliTerminalV0.4"
+    platform = "JarbasCliTerminalV0.5"
 
     def __init__(self, access_key=None,
                  host="wss://127.0.0.1",
                  port=5678,
-                 crypto_key=None,
+                 password=None,
                  self_signed=False,
-                 lang="en-us", bus=None):
+                 lang="en-us", bus=None, identity=None):
         super().__init__()
         self.lang = lang
 
@@ -29,19 +32,11 @@ class JarbasCliTerminal(Thread):
             self.bus = bus
         else:
             # connect to hivemind
-            self.bus = HiveMessageBusClient(key=access_key,
-                                            port=port,
-                                            host=host,
-                                            crypto_key=crypto_key,
-                                            ssl=host.startswith("wss:"),
-                                            useragent=self.platform,
+            self.bus = HiveMessageBusClient(access_key, host=host, port=port, password=password,
                                             self_signed=self_signed,
-                                            debug=False)
+                                            identity=identity or NodeIdentity(app_name="hivemind-cli"))
 
-            self.bus.run_in_thread()
-            # block until hivemind connects
-            print("Waiting for Hivemind connection")
-            self.bus.connected_event.wait()
+            self.bus.connect()
 
         self.bus.on_mycroft("speak", self.handle_speak)
 
@@ -49,7 +44,8 @@ class JarbasCliTerminal(Thread):
     def say(self, utterance):
         self.bus.emit(Message("recognizer_loop:utterance",
                               {"utterances": [utterance],
-                               "lang": self.lang}))
+                               "lang": self.lang},
+                              {"destination": "hive"}))
 
     def speak(self, utterance):
         print(" Mycroft:", utterance)
@@ -70,7 +66,7 @@ if curses is None:
 else:
 
     class JarbasCursesTerminal(JarbasCliTerminal):
-        platform = "JarbasCursesTerminalV0.2"
+        platform = "JarbasCursesTerminalV0.5"
 
         # terminal
         def speak(self, utterance):
