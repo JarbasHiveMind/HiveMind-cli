@@ -11,8 +11,10 @@ from dataclasses import dataclass, field
 from typing import List
 
 import pytest
+from json_database import JsonStorage
 
 from hivemind_bus_client.client import HiveMessageBusClient
+from hivemind_bus_client.identity import NodeIdentity
 from hivescope.topology import TopologyBuilder
 
 from hivemind_cli_terminal import JarbasCliTerminal
@@ -63,7 +65,7 @@ class CLIHarness:
 
 
 @pytest.fixture
-def cli_harness():
+def cli_harness(tmp_path):
     """Boot a loopback master, connect the real CLI terminal, mock terminal I/O.
 
     Yields a :class:`CLIHarness`. Tears the whole stack down afterwards.
@@ -89,6 +91,7 @@ def cli_harness():
             port=int(port),
             password=CLI_PASSWORD,
             useragent=JarbasCliTerminal.platform,
+            identity=NodeIdentity(identity_file=JsonStorage(str(tmp_path / "cli.json"))),
         )
         bus.connect(site_id="e2e-cli")
 

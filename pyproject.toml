@@ -12,7 +12,7 @@ requires-python = ">=3.10"
 dynamic = ["version"]
 dependencies = [
     # HiveMind bus stack — prerelease floor pins (resolved with no --pre)
-    "hivemind-bus-client>=1.0.16a1",
+    "hivemind-bus-client>=1.2.1a1",
     "hivemind-presence>=0.0.5a2",
     "ovos-bus-client>=2.9.1a1",
     "ovos-spec-tools>=0.8.0a1",

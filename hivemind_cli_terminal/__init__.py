@@ -1,6 +1,7 @@
 from threading import Thread
 
 from hivemind_bus_client.client import HiveMessageBusClient
+from hivemind_bus_client.identity import NodeIdentity
 from ovos_bus_client import Message
 from ovos_utils.log import LOG
 
@@ -22,7 +23,7 @@ class JarbasCliTerminal(Thread):
                  port=5678,
                  password=None,
                  self_signed=False,
-                 lang="en-us", bus=None):
+                 lang="en-us", bus=None, identity=None):
         super().__init__()
         self.lang = lang
 
@@ -32,7 +33,8 @@ class JarbasCliTerminal(Thread):
         else:
             # connect to hivemind
             self.bus = HiveMessageBusClient(access_key, host=host, port=port, password=password,
-                                            self_signed=self_signed)
+                                            self_signed=self_signed,
+                                            identity=identity or NodeIdentity(app_name="hivemind-cli"))
 
             self.bus.connect()
 
